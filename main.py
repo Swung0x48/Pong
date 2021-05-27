@@ -55,6 +55,10 @@ class Ball(Entity):
     def right_boundary(self):
         return self.xcor() + 5
 
+    def reset(self):
+        self.turtle.goto(0, 0)
+        self.x_vel *= -1
+
 
 class Game:
     def __init__(self, width, height):
@@ -96,15 +100,13 @@ class Game:
             self.ball.sety(-(self.height / 2 - 20))
             self.ball.y_vel *= -1
         if self.ball.xcor() > self.width / 2 - 20:
-            self.ball.turtle.goto(0, 0)
-            self.ball.x_vel *= -1
+            self.ball.reset()
             self.score_L += 1
             self.scoreboard.turtle.clear()
             self.scoreboard.turtle.write("L: {}    R: {}".format(self.score_L, self.score_R), align="center",
                                          font=("", 24, "normal"))
         if self.ball.xcor() < -(self.width / 2 - 10):
-            self.ball.turtle.goto(0, 0)
-            self.ball.x_vel *= -1
+            self.ball.reset()
             self.score_R += 1
             self.scoreboard.turtle.clear()
             self.scoreboard.turtle.write("L: {}    R: {}".format(self.score_L, self.score_R), align="center",
